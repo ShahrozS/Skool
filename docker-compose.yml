@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: skool-postgres
+    environment:
+      POSTGRES_DB: school_db
+      POSTGRES_USER: shahroz
+      POSTGRES_PASSWORD: shahroz
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
