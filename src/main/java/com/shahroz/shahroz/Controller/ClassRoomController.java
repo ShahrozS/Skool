@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/classes")
 @Tag(name = "Classes", description = "Manage class records")
 public class ClassRoomController {
 
     private final ClassRoomService classRoomService;
+
+    public ClassRoomController(ClassRoomService classRoomService) {
+        this.classRoomService = classRoomService;
+    }
+
 
     @GetMapping
     @Operation(summary = "Get all classes")
