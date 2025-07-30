@@ -22,13 +22,14 @@ public class ClassRoomController {
         this.classRoomService = classRoomService;
     }
 
-
+    // get all the classes stored in the database
     @GetMapping
     @Operation(summary = "Get all classes")
     public List<ClassRoom> getAll() {
         return classRoomService.getAllClasses();
     }
 
+    // get the class by id
     @GetMapping("/{id}")
     @Operation(summary = "Get class by ID")
     public ResponseEntity<ClassRoom> getById(@PathVariable Long id) {
@@ -37,12 +38,15 @@ public class ClassRoomController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // creates a class
     @PostMapping
     @Operation(summary = "Create a new class")
     public ClassRoom create(@RequestBody ClassRoom classRoom) {
         return classRoomService.createClass(classRoom);
     }
 
+
+    //update a class
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing class")
     public ResponseEntity<ClassRoom> update(@PathVariable Long id, @RequestBody ClassRoom updated) {
@@ -51,6 +55,8 @@ public class ClassRoomController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
+    //deletes a class by id
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a class")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

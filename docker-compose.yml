@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   postgres:
     image: postgres:15
@@ -11,6 +12,26 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - skool-net  # ✅ Attach to network
+
+  app:
+    build: .
+    container_name: school-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/school_db
+      SPRING_DATASOURCE_USERNAME: shahroz
+      SPRING_DATASOURCE_PASSWORD: shahroz
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - skool-net
 
 volumes:
   pgdata:
+
+networks:
+  skool-net:
